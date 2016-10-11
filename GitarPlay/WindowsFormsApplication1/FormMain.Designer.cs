@@ -133,6 +133,7 @@
             // 
             // tboxSearch
             // 
+            this.tboxSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tboxSearch.Location = new System.Drawing.Point(82, 5);
             this.tboxSearch.Name = "tboxSearch";
             this.tboxSearch.Size = new System.Drawing.Size(147, 23);
@@ -143,7 +144,7 @@
             // 
             this.lb1.AutoSize = true;
             this.lb1.ForeColor = System.Drawing.Color.Gainsboro;
-            this.lb1.Location = new System.Drawing.Point(14, 7);
+            this.lb1.Location = new System.Drawing.Point(14, 5);
             this.lb1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lb1.Name = "lb1";
             this.lb1.Size = new System.Drawing.Size(68, 17);
