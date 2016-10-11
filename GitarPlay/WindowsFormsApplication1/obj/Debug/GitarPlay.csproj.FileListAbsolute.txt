@@ -7,3 +7,12 @@ E:\Bayes\GitResp\Gitar-Play\GitarPlay\WindowsFormsApplication1\obj\Debug\GitarPl
 E:\Bayes\GitResp\Gitar-Play\GitarPlay\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.exe
 E:\Bayes\GitResp\Gitar-Play\GitarPlay\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.pdb
 E:\Bayes\GitResp\Gitar-Play\GitarPlay\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.FormMain.resources
+F:\Repository\Gitar-Play\GitarPlay\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe.config
+F:\Repository\Gitar-Play\GitarPlay\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.exe
+F:\Repository\Gitar-Play\GitarPlay\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.pdb
+F:\Repository\Gitar-Play\GitarPlay\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe
+F:\Repository\Gitar-Play\GitarPlay\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.pdb
+F:\Repository\Gitar-Play\GitarPlay\WindowsFormsApplication1\obj\Debug\GitarPlay.csprojResolveAssemblyReference.cache
+F:\Repository\Gitar-Play\GitarPlay\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.FormMain.resources
+F:\Repository\Gitar-Play\GitarPlay\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
+F:\Repository\Gitar-Play\GitarPlay\WindowsFormsApplication1\obj\Debug\GitarPlay.csproj.GenerateResource.Cache

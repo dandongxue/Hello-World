@@ -1,0 +1,8 @@
+F:\Repository\Gitar-Play\GitarPlay\WindowsFormsApplication1\bin\Release\WindowsFormsApplication1.exe.config
+F:\Repository\Gitar-Play\GitarPlay\WindowsFormsApplication1\bin\Release\WindowsFormsApplication1.exe
+F:\Repository\Gitar-Play\GitarPlay\WindowsFormsApplication1\bin\Release\WindowsFormsApplication1.pdb
+F:\Repository\Gitar-Play\GitarPlay\WindowsFormsApplication1\obj\Release\WindowsFormsApplication1.FormMain.resources
+F:\Repository\Gitar-Play\GitarPlay\WindowsFormsApplication1\obj\Release\WindowsFormsApplication1.Properties.Resources.resources
+F:\Repository\Gitar-Play\GitarPlay\WindowsFormsApplication1\obj\Release\GitarPlay.csproj.GenerateResource.Cache
+F:\Repository\Gitar-Play\GitarPlay\WindowsFormsApplication1\obj\Release\WindowsFormsApplication1.exe
+F:\Repository\Gitar-Play\GitarPlay\WindowsFormsApplication1\obj\Release\WindowsFormsApplication1.pdb

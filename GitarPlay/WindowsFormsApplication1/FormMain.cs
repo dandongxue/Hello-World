@@ -9,6 +9,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace WindowsFormsApplication1
 {
@@ -36,10 +37,37 @@ namespace WindowsFormsApplication1
                     {
                         TreeNode nodePic = new TreeNode(file.Name);
                         nodePic.Tag = file.FullName;
+                        nodePic.ImageIndex = 0;
                         subNode.Nodes.Add(nodePic);
                     }
                 }
             }
+
+        }
+        private void ShowInfoByElements(IEnumerable<XElement> elements)
+           {
+               foreach (var ele in elements)
+              {
+                   String GuitarName = ele.Attribute("Name").Value.ToString();
+                   int PicNum = Convert.ToInt16(ele.Attribute("PicNum").Value);
+                   TreeNode subNode =  trViewCollect.Nodes.Add(GuitarName);
+                   for (int i = 1; i <= PicNum; i++)
+                   {
+                       String Gitpath = ele.Element("path"+i.ToString()).Value.ToString();
+                       DirectoryInfo info = new DirectoryInfo(Gitpath);
+                       TreeNode nodePic = new TreeNode(info.Name);
+                       nodePic.Tag = Gitpath;
+                       nodePic.ImageIndex = 0;
+                       subNode.Nodes.Add(nodePic);
+                   }
+              }
+             
+         }
+        void InitCollectTree(TreeView trView, String fileName)
+        {
+            XElement xe = XElement.Load(fileName);
+            IEnumerable<XElement> elements = from ele in xe.Elements("Guitar") select ele;
+            ShowInfoByElements(elements);
 
         }
         private void Form1_Load(object sender, EventArgs e)
@@ -50,8 +78,8 @@ namespace WindowsFormsApplication1
             {
                 Directory.CreateDirectory(workDir + "\\Gitar");     
             }
-            workDir += "\\Gitar";
-            InitTreeView(trviewGitar, workDir);
+            InitCollectTree(trViewCollect, workDir + "\\collect.xml");
+            InitTreeView(trviewGitar, workDir + "\\Gitar");
             lbNum.Text = trviewGitar.Nodes.Count.ToString();
         }
         void Form1_MouseWheel(object sender, MouseEventArgs e)
@@ -76,7 +104,8 @@ namespace WindowsFormsApplication1
 
         private void btnTest_Click(object sender, EventArgs e)
         {
-            //picboxMain.Image = Image.FromFile("E:\\Bayes\\GitResp\\Gitar-Play\\GitarPlay\\WindowsFormsApplication1\\1.jpg");
+            //MessageBox.Show(workDir + "\\collect.xml");
+           
         }
 
         private void Form1_SizeChanged(object sender, EventArgs e)
@@ -90,6 +119,7 @@ namespace WindowsFormsApplication1
             {
                 String picPath = e.Node.Tag.ToString();
                 picboxMain.Image = Image.FromFile(picPath);
+               // picboxMain.Size = Image.FromFile(picPath).Size;
             }
         }
 
@@ -99,7 +129,6 @@ namespace WindowsFormsApplication1
             picboxMain.Size = new Size(picboxMain.Width + 50, picboxMain.Height + 50);
             double len = 2.6 * (button1.Width);
             picboxMain.Location = new Point((this.Width - picboxMain.Width + Convert.ToInt16(len)) / 2, (this.Height - picboxMain.Height) / 2);
-
             /* System.Drawing.SolidBrush myBrush = new System.Drawing.SolidBrush(System.Drawing.Color.Red);//画刷
              System.Drawing.Graphics formGraphics = this.CreateGraphics();
              formGraphics.FillEllipse(myBrush, new Rectangle(pInit.X, pInit.Y, 50, 50));//画实心椭圆*/
@@ -110,7 +139,7 @@ namespace WindowsFormsApplication1
             tabControl1.SelectedIndex = 1;
             trViewSearch.Nodes.Clear();
             String ans = tboxSearch.Text.Trim();
-            trviewGitar.Nodes[5].Checked = true;
+            //trviewGitar.Nodes[5].Checked = true;
             foreach (TreeNode tnode in trviewGitar.Nodes)
             {
                 if (tnode.Text.Contains(ans))
@@ -129,6 +158,15 @@ namespace WindowsFormsApplication1
             }
         }
         private void trViewSearch_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            if (e.Node.Level == 1 && (e.Button == MouseButtons.Left))
+            {
+                String picPath = e.Node.Tag.ToString();
+                picboxMain.Image = Image.FromFile(picPath);
+            }
+        }
+
+        private void trViewCollect_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             if (e.Node.Level == 1 && (e.Button == MouseButtons.Left))
             {

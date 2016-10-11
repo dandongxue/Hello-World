@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+    <collectstore>
+      <Guitar Name="Dandonggege" PicNum="2" ISBN="7-111-19149-2">
+        <path1>F:\Repository\Gitar-Play\GitarPlay\Gitar\《斑马斑马》by午夜编配-宋冬野\1.gif</path1>
+		<path2>F:\Repository\Gitar-Play\GitarPlay\Gitar\《斑马斑马》by午夜编配-宋冬野\2.gif</path2>
+        <author>严蔚敏</author>
+      </Guitar>
+	  <Guitar Name="DayDayMissyou" PicNum="2" ISBN="7-111-19149-2">
+        <path1>F:\Repository\Gitar-Play\GitarPlay\Gitar\《斑马斑马》by午夜编配-宋冬野\1.gif</path1>
+		<path2>F:\Repository\Gitar-Play\GitarPlay\Gitar\《斑马斑马》by午夜编配-宋冬野\2.gif</path2>
+        <author>严蔚敏</author>
+      </Guitar>  
+   </collectstore>
