@@ -5,10 +5,13 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Sockets;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
 using System.Xml.Linq;
 
 namespace WindowsFormsApplication1
@@ -17,6 +20,11 @@ namespace WindowsFormsApplication1
     {
         private PublicClass.AutoSizeForm autoform = new PublicClass.AutoSizeForm();
         private String workDir = new DirectoryInfo(Application.StartupPath).Parent.Parent.Parent.FullName;
+        private IPEndPoint ipLocalPoint,remoteIpend;
+        private IPAddress lip, remoteIp;
+        private int localPort = 5526;
+        private Socket mySocket;  
+        private bool RunningFlag = false;
         public FormMain()
         {
             InitializeComponent();
@@ -65,6 +73,7 @@ namespace WindowsFormsApplication1
          }
         void InitCollectTree(TreeView trView, String fileName)
         {
+            trView.Nodes.Clear();
             XElement xe = XElement.Load(fileName);
             IEnumerable<XElement> elements = from ele in xe.Elements("Guitar") select ele;
             ShowInfoByElements(elements);
@@ -76,11 +85,20 @@ namespace WindowsFormsApplication1
             this.MouseWheel += Form1_MouseWheel;
             if (Directory.Exists(workDir+"\\Gitar") == false)//如果不存在就创建file文件夹     
             {
+                MessageBox.Show(workDir + "\\Gitar");
                 Directory.CreateDirectory(workDir + "\\Gitar");     
             }
             InitCollectTree(trViewCollect, workDir + "\\collect.xml");
             InitTreeView(trviewGitar, workDir + "\\Gitar");
             lbNum.Text = trviewGitar.Nodes.Count.ToString();
+
+
+            IPAddress.TryParse(getIPAddress(),out lip);
+            IPAddress.TryParse("192.168.1.105", out remoteIp);
+            remoteIpend = new IPEndPoint(remoteIp, 7788);
+            ipLocalPoint = new IPEndPoint(lip, localPort);
+            mySocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+            mySocket.Bind(ipLocalPoint); 
         }
         void Form1_MouseWheel(object sender, MouseEventArgs e)
         {
@@ -139,7 +157,6 @@ namespace WindowsFormsApplication1
             tabControl1.SelectedIndex = 1;
             trViewSearch.Nodes.Clear();
             String ans = tboxSearch.Text.Trim();
-            //trviewGitar.Nodes[5].Checked = true;
             foreach (TreeNode tnode in trviewGitar.Nodes)
             {
                 if (tnode.Text.Contains(ans))
@@ -156,6 +173,8 @@ namespace WindowsFormsApplication1
                     }    
                 }
             }
+            byte[] data = Encoding.Default.GetBytes(ans);
+            mySocket.SendTo(data, data.Length, SocketFlags.None, remoteIpend); 
         }
         private void trViewSearch_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
@@ -173,6 +192,111 @@ namespace WindowsFormsApplication1
                 String picPath = e.Node.Tag.ToString();
                 picboxMain.Image = Image.FromFile(picPath);
             }
+        }
+
+        private void trViewSearch_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            if (e.Node.Level == 0 && (e.Button == MouseButtons.Left))
+            {
+                String songName = e.Node.Text;
+                XmlDocument doc = new XmlDocument();　  
+                string strFileName = workDir + "\\collect.xml";
+                doc.Load(strFileName);
+                XmlNode root = doc.SelectSingleNode("collectstore");
+                XmlNodeList nodes = root.ChildNodes;
+                XmlNodeList nodeds = root.SelectNodes("Guitar");
+                for (int i = 0; i < nodeds.Count; i++)
+                {
+                    XmlElement xe = (XmlElement)nodeds[i];
+
+                    if (xe.GetAttribute("Name").Equals(songName))
+                    {
+                        MessageBox.Show("对不起，您已收藏!！");
+                        return;
+                    }
+                }
+               
+                XmlElement xe1 = doc.CreateElement("Guitar");//创建一个<Node>节点 
+                xe1.SetAttribute("Name", songName);//设置该节点genre属性 
+                xe1.SetAttribute("ISBN", "7-111-19149-2");//设置该节点ISBN属性
+                xe1.SetAttribute("PicNum", e.Node.Nodes.Count.ToString());//设置该节点genre属性 
+                int num=1;
+                foreach (TreeNode tr in e.Node.Nodes)
+                {
+                    XmlElement xesub1 = doc.CreateElement("path"+(num++).ToString());
+                    xesub1.InnerText = tr.Tag.ToString();//设置文本节点 
+                    xe1.AppendChild(xesub1);
+                }
+                root.AppendChild(xe1);
+                try
+                {
+                    //保存上面的修改　　  
+                    doc.Save(strFileName);
+                    MessageBox.Show("已成功收藏曲目《"+songName+"》");
+                    InitCollectTree(trViewCollect, workDir + "\\collect.xml");
+                }
+                catch (Exception e3)
+                {
+                    throw e3;
+                }  
+            }
+        }
+       private string getIPAddress()  
+       {   
+            IPAddress[] AddressList = Dns.GetHostByName(Dns.GetHostName()).AddressList;  
+            if (AddressList.Length < 1)  
+            {  
+                 return "";  
+             }  
+            return AddressList[0].ToString();  
+        }
+        private void trviewGitar_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            if (e.Node.Level == 0 && (e.Button == MouseButtons.Left))
+            {
+                String songName = e.Node.Text;
+                XmlDocument doc = new XmlDocument();　  
+                string strFileName = workDir + "\\collect.xml";
+                doc.Load(strFileName);
+                XmlNode root = doc.SelectSingleNode("collectstore");
+                XmlNodeList nodes = root.ChildNodes;
+                XmlNodeList nodeds = root.SelectNodes("Guitar");
+                for (int i = 0; i < nodeds.Count; i++)
+                {
+                    XmlElement xe = (XmlElement)nodeds[i];
+
+                    if (xe.GetAttribute("Name").Equals(songName))
+                    {
+                        MessageBox.Show("对不起，您已收藏!！");
+                        return;
+                    }
+                }
+               
+                XmlElement xe1 = doc.CreateElement("Guitar");//创建一个<Node>节点 
+                xe1.SetAttribute("Name", songName);//设置该节点genre属性 
+                xe1.SetAttribute("ISBN", "7-111-19149-2");//设置该节点ISBN属性
+                xe1.SetAttribute("PicNum", e.Node.Nodes.Count.ToString());//设置该节点genre属性 
+                int num=1;
+                foreach (TreeNode tr in e.Node.Nodes)
+                {
+                    XmlElement xesub1 = doc.CreateElement("path"+(num++).ToString());
+                    xesub1.InnerText = tr.Tag.ToString();//设置文本节点 
+                    xe1.AppendChild(xesub1);
+                }
+                root.AppendChild(xe1);
+                try
+                {
+                    //保存上面的修改　　  
+                    doc.Save(strFileName);
+                    MessageBox.Show("已成功收藏曲目《"+songName+"》");
+                    InitCollectTree(trViewCollect, workDir + "\\collect.xml");
+                }
+                catch (Exception e3)
+                {
+                    throw e3;
+                }  
+            }
+        
         }
     }
 }

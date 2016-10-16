@@ -72,6 +72,7 @@
             this.trviewGitar.Size = new System.Drawing.Size(270, 524);
             this.trviewGitar.TabIndex = 0;
             this.trviewGitar.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.trviewGitar_NodeMouseClick);
+            this.trviewGitar.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.trviewGitar_NodeMouseDoubleClick);
             // 
             // imageList1
             // 
@@ -179,7 +180,7 @@
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.Transparent;
-            this.button1.Location = new System.Drawing.Point(795, 108);
+            this.button1.Location = new System.Drawing.Point(769, 108);
             this.button1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(71, 45);
@@ -189,7 +190,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(795, 393);
+            this.button2.Location = new System.Drawing.Point(769, 393);
             this.button2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(71, 45);
@@ -221,6 +222,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.BackColor = System.Drawing.Color.DarkGray;
             this.tabPage2.Controls.Add(this.trViewSearch);
             this.tabPage2.Location = new System.Drawing.Point(4, 26);
             this.tabPage2.Name = "tabPage2";
@@ -228,7 +230,6 @@
             this.tabPage2.Size = new System.Drawing.Size(267, 522);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "搜索";
-            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // trViewSearch
             // 
@@ -239,6 +240,7 @@
             this.trViewSearch.Size = new System.Drawing.Size(270, 524);
             this.trViewSearch.TabIndex = 1;
             this.trViewSearch.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.trViewSearch_NodeMouseClick);
+            this.trViewSearch.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.trViewSearch_NodeMouseDoubleClick);
             // 
             // tabPage3
             // 
@@ -276,7 +278,7 @@
             // picBoxAuthor
             // 
             this.picBoxAuthor.Image = global::WindowsFormsApplication1.Properties.Resources.author;
-            this.picBoxAuthor.Location = new System.Drawing.Point(790, 499);
+            this.picBoxAuthor.Location = new System.Drawing.Point(764, 499);
             this.picBoxAuthor.Name = "picBoxAuthor";
             this.picBoxAuthor.Size = new System.Drawing.Size(114, 173);
             this.picBoxAuthor.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -288,9 +290,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(904, 672);
+            this.ClientSize = new System.Drawing.Size(881, 672);
             this.Controls.Add(this.picBoxAuthor);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.lb3);
