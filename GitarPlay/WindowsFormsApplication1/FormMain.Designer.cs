@@ -35,9 +35,7 @@
             this.picboxMain = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.btnSearch = new System.Windows.Forms.Button();
             this.tboxSearch = new System.Windows.Forms.TextBox();
-            this.lb1 = new System.Windows.Forms.Label();
             this.lb3 = new System.Windows.Forms.Label();
             this.lbNum = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
@@ -86,7 +84,7 @@
             this.picboxMain.BackColor = System.Drawing.Color.Transparent;
             this.picboxMain.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.picboxMain.InitialImage = null;
-            this.picboxMain.Location = new System.Drawing.Point(300, 8);
+            this.picboxMain.Location = new System.Drawing.Point(292, 8);
             this.picboxMain.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.picboxMain.Name = "picboxMain";
             this.picboxMain.Size = new System.Drawing.Size(457, 633);
@@ -100,57 +98,32 @@
             this.panel1.BackColor = System.Drawing.Color.Transparent;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel1.Controls.Add(this.pictureBox1);
-            this.panel1.Controls.Add(this.btnSearch);
             this.panel1.Controls.Add(this.tboxSearch);
-            this.panel1.Controls.Add(this.lb1);
             this.panel1.Location = new System.Drawing.Point(3, 8);
             this.panel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(273, 78);
+            this.panel1.Size = new System.Drawing.Size(273, 62);
             this.panel1.TabIndex = 3;
             // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::WindowsFormsApplication1.Properties.Resources.search_128px_1202802_easyicon_net;
-            this.pictureBox1.Location = new System.Drawing.Point(10, 27);
+            this.pictureBox1.Location = new System.Drawing.Point(10, 6);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(70, 46);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 5;
             this.pictureBox1.TabStop = false;
             // 
-            // btnSearch
-            // 
-            this.btnSearch.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnSearch.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnSearch.Location = new System.Drawing.Point(140, 36);
-            this.btnSearch.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(70, 33);
-            this.btnSearch.TabIndex = 4;
-            this.btnSearch.Text = "搜索";
-            this.btnSearch.UseVisualStyleBackColor = true;
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
-            // 
             // tboxSearch
             // 
             this.tboxSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tboxSearch.Location = new System.Drawing.Point(82, 5);
+            this.tboxSearch.Location = new System.Drawing.Point(87, 18);
             this.tboxSearch.Name = "tboxSearch";
-            this.tboxSearch.Size = new System.Drawing.Size(147, 23);
+            this.tboxSearch.Size = new System.Drawing.Size(179, 23);
             this.tboxSearch.TabIndex = 4;
             this.tboxSearch.Text = "斑马斑马";
-            // 
-            // lb1
-            // 
-            this.lb1.AutoSize = true;
-            this.lb1.ForeColor = System.Drawing.Color.Gainsboro;
-            this.lb1.Location = new System.Drawing.Point(14, 5);
-            this.lb1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lb1.Name = "lb1";
-            this.lb1.Size = new System.Drawing.Size(68, 17);
-            this.lb1.TabIndex = 1;
-            this.lb1.Text = "本地搜索：";
+            this.tboxSearch.TextChanged += new System.EventHandler(this.tboxSearch_TextChanged);
             // 
             // lb3
             // 
@@ -327,9 +300,7 @@
         private System.Windows.Forms.TreeView trviewGitar;
         private System.Windows.Forms.PictureBox picboxMain;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.TextBox tboxSearch;
-        private System.Windows.Forms.Label lb1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label lb3;

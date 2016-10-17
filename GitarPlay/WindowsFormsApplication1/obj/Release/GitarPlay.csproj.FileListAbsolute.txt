@@ -6,3 +6,4 @@ F:\Repository\Gitar-Play\GitarPlay\WindowsFormsApplication1\obj\Release\WindowsF
 F:\Repository\Gitar-Play\GitarPlay\WindowsFormsApplication1\obj\Release\GitarPlay.csproj.GenerateResource.Cache
 F:\Repository\Gitar-Play\GitarPlay\WindowsFormsApplication1\obj\Release\WindowsFormsApplication1.exe
 F:\Repository\Gitar-Play\GitarPlay\WindowsFormsApplication1\obj\Release\WindowsFormsApplication1.pdb
+F:\Repository\Gitar-Play\GitarPlay\WindowsFormsApplication1\obj\Release\GitarPlay.csprojResolveAssemblyReference.cache

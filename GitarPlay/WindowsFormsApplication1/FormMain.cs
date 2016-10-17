@@ -137,19 +137,16 @@ namespace WindowsFormsApplication1
             {
                 String picPath = e.Node.Tag.ToString();
                 picboxMain.Image = Image.FromFile(picPath);
-               // picboxMain.Size = Image.FromFile(picPath).Size;
             }
         }
 
         private void picboxMain_MouseClick(object sender, MouseEventArgs e)
         {
-            System.Drawing.Point pInit = picboxMain.Location;
+            /*System.Drawing.Point pInit = picboxMain.Location;
             picboxMain.Size = new Size(picboxMain.Width + 50, picboxMain.Height + 50);
             double len = 2.6 * (button1.Width);
             picboxMain.Location = new Point((this.Width - picboxMain.Width + Convert.ToInt16(len)) / 2, (this.Height - picboxMain.Height) / 2);
-            /* System.Drawing.SolidBrush myBrush = new System.Drawing.SolidBrush(System.Drawing.Color.Red);//画刷
-             System.Drawing.Graphics formGraphics = this.CreateGraphics();
-             formGraphics.FillEllipse(myBrush, new Rectangle(pInit.X, pInit.Y, 50, 50));//画实心椭圆*/
+                */
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -215,7 +212,6 @@ namespace WindowsFormsApplication1
                         return;
                     }
                 }
-               
                 XmlElement xe1 = doc.CreateElement("Guitar");//创建一个<Node>节点 
                 xe1.SetAttribute("Name", songName);//设置该节点genre属性 
                 xe1.SetAttribute("ISBN", "7-111-19149-2");//设置该节点ISBN属性
@@ -271,7 +267,6 @@ namespace WindowsFormsApplication1
                         return;
                     }
                 }
-               
                 XmlElement xe1 = doc.CreateElement("Guitar");//创建一个<Node>节点 
                 xe1.SetAttribute("Name", songName);//设置该节点genre属性 
                 xe1.SetAttribute("ISBN", "7-111-19149-2");//设置该节点ISBN属性
@@ -297,6 +292,31 @@ namespace WindowsFormsApplication1
                 }  
             }
         
+        }
+
+        private void tboxSearch_TextChanged(object sender, EventArgs e)
+        {
+            tabControl1.SelectedIndex = 1;
+            trViewSearch.Nodes.Clear();
+            String ans = tboxSearch.Text.Trim();
+            foreach (TreeNode tnode in trviewGitar.Nodes)
+            {
+                if (tnode.Text.Contains(ans))
+                {
+                    DirectoryInfo info = new DirectoryInfo(tnode.Tag.ToString());
+                    TreeNode subNode = trViewSearch.Nodes.Add(info.Name);
+                    //subNode.Tag = dirList[i].FullName;
+                    DirectoryInfo folder = new DirectoryInfo(tnode.Tag.ToString());
+                    foreach (FileInfo file in folder.GetFiles())
+                    {
+                        TreeNode nodePic = new TreeNode(file.Name);
+                        nodePic.Tag = file.FullName;
+                        subNode.Nodes.Add(nodePic);
+                    }
+                }
+            }
+            byte[] data = Encoding.Default.GetBytes(ans);
+            mySocket.SendTo(data, data.Length, SocketFlags.None, remoteIpend); 
         }
     }
 }
