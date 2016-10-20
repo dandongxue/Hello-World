@@ -23,7 +23,8 @@ namespace WindowsFormsApplication1
         private IPEndPoint ipLocalPoint,remoteIpend;
         private IPAddress lip, remoteIp;
         private int localPort = 5526;
-        private Socket mySocket;  
+        private Socket mySocket;
+        private TcpClient tcp;
         private bool RunningFlag = false;
         public FormMain()
         {
@@ -92,13 +93,15 @@ namespace WindowsFormsApplication1
             InitTreeView(trviewGitar, workDir + "\\Gitar");
             lbNum.Text = trviewGitar.Nodes.Count.ToString();
 
-
-            IPAddress.TryParse(getIPAddress(),out lip);
-            IPAddress.TryParse("192.168.1.105", out remoteIp);
-            remoteIpend = new IPEndPoint(remoteIp, 7788);
-            ipLocalPoint = new IPEndPoint(lip, localPort);
+            //MessageBox.Show(getIPAddress());
+            /*IPAddress.TryParse(getIPAddress(), out lip);
+            ipLocalPoint = new IPEndPoint(lip, localPort);*/
+            IPAddress.TryParse("120.210.207.197", out remoteIp);//"120.210.207.197"
+            /*remoteIpend = new IPEndPoint(remoteIp, 28585);
+            
             mySocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
-            mySocket.Bind(ipLocalPoint); 
+            mySocket.Bind(ipLocalPoint);*/
+            
         }
         void Form1_MouseWheel(object sender, MouseEventArgs e)
         {
@@ -315,8 +318,19 @@ namespace WindowsFormsApplication1
                     }
                 }
             }
-            byte[] data = Encoding.Default.GetBytes(ans);
-            mySocket.SendTo(data, data.Length, SocketFlags.None, remoteIpend); 
+            tcp=new TcpClient();
+            tcp.Connect(remoteIp, 28585);
+            if (tcp.Connected)
+            {
+                byte[] data = Encoding.Default.GetBytes(ans);
+                NetworkStream streamToServer = tcp.GetStream();
+                streamToServer.Write(data, 0, data.Length);
+                streamToServer.Flush();
+                //int sendNum = mySocket.SendTo(data, data.Length, SocketFlags.None, remoteIpend);
+            }
+            tcp.Close();
+            //tcp.
+            //MessageBox.Show(sendNum.ToString());
         }
     }
 }
