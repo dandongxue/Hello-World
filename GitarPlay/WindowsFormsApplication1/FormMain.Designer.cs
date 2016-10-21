@@ -69,6 +69,7 @@
             this.trviewGitar.SelectedImageIndex = 0;
             this.trviewGitar.Size = new System.Drawing.Size(270, 524);
             this.trviewGitar.TabIndex = 0;
+            this.trviewGitar.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.trviewGitar_AfterSelect);
             this.trviewGitar.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.trviewGitar_NodeMouseClick);
             this.trviewGitar.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.trviewGitar_NodeMouseDoubleClick);
             // 
@@ -87,7 +88,7 @@
             this.picboxMain.Location = new System.Drawing.Point(292, 8);
             this.picboxMain.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.picboxMain.Name = "picboxMain";
-            this.picboxMain.Size = new System.Drawing.Size(457, 633);
+            this.picboxMain.Size = new System.Drawing.Size(457, 661);
             this.picboxMain.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picboxMain.TabIndex = 1;
             this.picboxMain.TabStop = false;
@@ -130,7 +131,7 @@
             this.lb3.AutoSize = true;
             this.lb3.BackColor = System.Drawing.Color.Transparent;
             this.lb3.ForeColor = System.Drawing.Color.Gainsboro;
-            this.lb3.Location = new System.Drawing.Point(151, 647);
+            this.lb3.Location = new System.Drawing.Point(154, 649);
             this.lb3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lb3.Name = "lb3";
             this.lb3.Size = new System.Drawing.Size(44, 17);
@@ -143,7 +144,7 @@
             this.lbNum.BackColor = System.Drawing.Color.Transparent;
             this.lbNum.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lbNum.ForeColor = System.Drawing.Color.Gainsboro;
-            this.lbNum.Location = new System.Drawing.Point(102, 645);
+            this.lbNum.Location = new System.Drawing.Point(105, 647);
             this.lbNum.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbNum.Name = "lbNum";
             this.lbNum.Size = new System.Drawing.Size(30, 22);
@@ -153,23 +154,25 @@
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.Transparent;
-            this.button1.Location = new System.Drawing.Point(769, 108);
+            this.button1.Location = new System.Drawing.Point(786, 108);
             this.button1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(71, 45);
+            this.button1.Size = new System.Drawing.Size(82, 45);
             this.button1.TabIndex = 5;
             this.button1.Text = "上一页";
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(769, 393);
+            this.button2.Location = new System.Drawing.Point(786, 393);
             this.button2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(71, 45);
+            this.button2.Size = new System.Drawing.Size(82, 45);
             this.button2.TabIndex = 6;
             this.button2.Text = "下一页";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // tabControl1
             // 
@@ -195,7 +198,7 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.BackColor = System.Drawing.Color.DarkGray;
+            this.tabPage2.BackColor = System.Drawing.Color.White;
             this.tabPage2.Controls.Add(this.trViewSearch);
             this.tabPage2.Location = new System.Drawing.Point(4, 26);
             this.tabPage2.Name = "tabPage2";
@@ -210,7 +213,7 @@
             this.trViewSearch.Location = new System.Drawing.Point(-2, -1);
             this.trViewSearch.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.trViewSearch.Name = "trViewSearch";
-            this.trViewSearch.Size = new System.Drawing.Size(270, 524);
+            this.trViewSearch.Size = new System.Drawing.Size(273, 527);
             this.trViewSearch.TabIndex = 1;
             this.trViewSearch.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.trViewSearch_NodeMouseClick);
             this.trViewSearch.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.trViewSearch_NodeMouseDoubleClick);
@@ -241,7 +244,7 @@
             this.lb2.AutoSize = true;
             this.lb2.BackColor = System.Drawing.Color.Transparent;
             this.lb2.ForeColor = System.Drawing.Color.Gainsboro;
-            this.lb2.Location = new System.Drawing.Point(32, 647);
+            this.lb2.Location = new System.Drawing.Point(35, 649);
             this.lb2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lb2.Name = "lb2";
             this.lb2.Size = new System.Drawing.Size(60, 17);
@@ -251,18 +254,20 @@
             // picBoxAuthor
             // 
             this.picBoxAuthor.Image = global::WindowsFormsApplication1.Properties.Resources.author;
-            this.picBoxAuthor.Location = new System.Drawing.Point(764, 499);
+            this.picBoxAuthor.Location = new System.Drawing.Point(755, 498);
             this.picBoxAuthor.Name = "picBoxAuthor";
-            this.picBoxAuthor.Size = new System.Drawing.Size(114, 173);
+            this.picBoxAuthor.Size = new System.Drawing.Size(122, 173);
             this.picBoxAuthor.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picBoxAuthor.TabIndex = 9;
             this.picBoxAuthor.TabStop = false;
+            this.picBoxAuthor.MouseClick += new System.Windows.Forms.MouseEventHandler(this.picBoxAuthor_MouseClick);
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.BackgroundImage = global::WindowsFormsApplication1.Properties.Resources._11;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(881, 672);
             this.Controls.Add(this.picBoxAuthor);
@@ -277,8 +282,11 @@
             this.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.MinimumSize = new System.Drawing.Size(897, 710);
             this.Name = "FormMain";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DD Guitar";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.SizeChanged += new System.EventHandler(this.Form1_SizeChanged);
             ((System.ComponentModel.ISupportInitialize)(this.picboxMain)).EndInit();

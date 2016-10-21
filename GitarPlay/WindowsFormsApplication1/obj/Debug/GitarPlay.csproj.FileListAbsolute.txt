@@ -16,3 +16,4 @@ F:\Repository\Gitar-Play\GitarPlay\WindowsFormsApplication1\obj\Debug\GitarPlay.
 F:\Repository\Gitar-Play\GitarPlay\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.FormMain.resources
 F:\Repository\Gitar-Play\GitarPlay\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
 F:\Repository\Gitar-Play\GitarPlay\WindowsFormsApplication1\obj\Debug\GitarPlay.csproj.GenerateResource.Cache
+F:\Repository\Gitar-Play\GitarPlay\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.frmIntro.resources

@@ -26,6 +26,7 @@ namespace WindowsFormsApplication1
         private Socket mySocket;
         private TcpClient tcp;
         private bool RunningFlag = false;
+        private TreeNode curNode=null;
         public FormMain()
         {
             InitializeComponent();
@@ -140,6 +141,7 @@ namespace WindowsFormsApplication1
             {
                 String picPath = e.Node.Tag.ToString();
                 picboxMain.Image = Image.FromFile(picPath);
+                curNode = e.Node;
             }
         }
 
@@ -233,6 +235,7 @@ namespace WindowsFormsApplication1
                     doc.Save(strFileName);
                     MessageBox.Show("已成功收藏曲目《"+songName+"》");
                     InitCollectTree(trViewCollect, workDir + "\\collect.xml");
+                    
                 }
                 catch (Exception e3)
                 {
@@ -302,6 +305,8 @@ namespace WindowsFormsApplication1
             tabControl1.SelectedIndex = 1;
             trViewSearch.Nodes.Clear();
             String ans = tboxSearch.Text.Trim();
+            if (ans.Trim() == "")
+                return;
             foreach (TreeNode tnode in trviewGitar.Nodes)
             {
                 if (tnode.Text.Contains(ans))
@@ -319,18 +324,66 @@ namespace WindowsFormsApplication1
                 }
             }
             tcp=new TcpClient();
-            tcp.Connect(remoteIp, 28585);
-            if (tcp.Connected)
+            try
             {
-                byte[] data = Encoding.Default.GetBytes(ans);
-                NetworkStream streamToServer = tcp.GetStream();
-                streamToServer.Write(data, 0, data.Length);
-                streamToServer.Flush();
-                //int sendNum = mySocket.SendTo(data, data.Length, SocketFlags.None, remoteIpend);
+                tcp.Connect(remoteIp, 28585);
+                if (tcp.Connected)
+                {
+                    byte[] data = Encoding.Default.GetBytes(ans);
+                    NetworkStream streamToServer = tcp.GetStream();
+                    streamToServer.Write(data, 0, data.Length);
+                    streamToServer.Flush();
+                    //int sendNum = mySocket.SendTo(data, data.Length, SocketFlags.None, remoteIpend);
+                }
+                tcp.Close();
             }
-            tcp.Close();
-            //tcp.
-            //MessageBox.Show(sendNum.ToString());
+            catch (Exception ee)
+            {
+                //MessageBox.Show(ee.Message);
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (curNode == null || curNode.NextNode == null)
+                return;
+            curNode = curNode.NextNode;
+            if (curNode != null)
+            {
+                String picPath = curNode.Tag.ToString();
+                picboxMain.Image = Image.FromFile(picPath);
+            }
+
+        }
+
+        private void trviewGitar_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (curNode == null || curNode.PrevNode == null)
+                return;
+            curNode = curNode.PrevNode;
+            if (curNode != null)
+            {
+                String picPath = curNode.Tag.ToString();
+                picboxMain.Image = Image.FromFile(picPath);
+            }
+        }
+
+        private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if(tcp!=null)
+               tcp.Close();
+
+        }
+
+        private void picBoxAuthor_MouseClick(object sender, MouseEventArgs e)
+        {
+            frmIntro frm = new frmIntro();
+            frm.Show();
         }
     }
 }
