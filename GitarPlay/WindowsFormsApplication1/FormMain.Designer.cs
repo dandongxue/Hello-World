@@ -47,7 +47,7 @@
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.trViewCollect = new System.Windows.Forms.TreeView();
             this.lb2 = new System.Windows.Forms.Label();
-            this.picBoxAuthor = new System.Windows.Forms.PictureBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.picboxMain)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -55,7 +55,6 @@
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picBoxAuthor)).BeginInit();
             this.SuspendLayout();
             // 
             // trviewGitar
@@ -69,7 +68,6 @@
             this.trviewGitar.SelectedImageIndex = 0;
             this.trviewGitar.Size = new System.Drawing.Size(270, 524);
             this.trviewGitar.TabIndex = 0;
-            this.trviewGitar.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.trviewGitar_AfterSelect);
             this.trviewGitar.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.trviewGitar_NodeMouseClick);
             this.trviewGitar.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.trviewGitar_NodeMouseDoubleClick);
             // 
@@ -92,7 +90,6 @@
             this.picboxMain.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picboxMain.TabIndex = 1;
             this.picboxMain.TabStop = false;
-            this.picboxMain.MouseClick += new System.Windows.Forms.MouseEventHandler(this.picboxMain_MouseClick);
             // 
             // panel1
             // 
@@ -154,7 +151,7 @@
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.Transparent;
-            this.button1.Location = new System.Drawing.Point(786, 108);
+            this.button1.Location = new System.Drawing.Point(770, 95);
             this.button1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(82, 45);
@@ -165,7 +162,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(786, 393);
+            this.button2.Location = new System.Drawing.Point(770, 499);
             this.button2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(82, 45);
@@ -251,16 +248,19 @@
             this.lb2.TabIndex = 5;
             this.lb2.Text = "统计 共：";
             // 
-            // picBoxAuthor
+            // label1
             // 
-            this.picBoxAuthor.Image = global::WindowsFormsApplication1.Properties.Resources.author;
-            this.picBoxAuthor.Location = new System.Drawing.Point(755, 498);
-            this.picBoxAuthor.Name = "picBoxAuthor";
-            this.picBoxAuthor.Size = new System.Drawing.Size(122, 173);
-            this.picBoxAuthor.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picBoxAuthor.TabIndex = 9;
-            this.picBoxAuthor.TabStop = false;
-            this.picBoxAuthor.MouseClick += new System.Windows.Forms.MouseEventHandler(this.picBoxAuthor_MouseClick);
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.ForeColor = System.Drawing.Color.Firebrick;
+            this.label1.Location = new System.Drawing.Point(761, 10);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(74, 22);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "软件说明";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // FormMain
             // 
@@ -269,8 +269,8 @@
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.BackgroundImage = global::WindowsFormsApplication1.Properties.Resources._11;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(881, 672);
-            this.Controls.Add(this.picBoxAuthor);
+            this.ClientSize = new System.Drawing.Size(864, 672);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.lb3);
             this.Controls.Add(this.lbNum);
@@ -281,14 +281,16 @@
             this.Controls.Add(this.picboxMain);
             this.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.MinimumSize = new System.Drawing.Size(897, 710);
+            this.MinimumSize = new System.Drawing.Size(880, 710);
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DD Guitar";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.SizeChanged += new System.EventHandler(this.Form1_SizeChanged);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormMain_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.picboxMain)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -297,7 +299,6 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.picBoxAuthor)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -322,7 +323,7 @@
         private System.Windows.Forms.TreeView trViewCollect;
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.PictureBox picBoxAuthor;
+        private System.Windows.Forms.Label label1;
     }
 }
 

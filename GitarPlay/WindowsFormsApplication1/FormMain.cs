@@ -124,11 +124,6 @@ namespace WindowsFormsApplication1
             formGraphics.FillEllipse(myBrush, new Rectangle(pInit.X, pInit.Y, 50, 50));//画实心椭圆*/
         }
 
-        private void btnTest_Click(object sender, EventArgs e)
-        {
-            //MessageBox.Show(workDir + "\\collect.xml");
-           
-        }
 
         private void Form1_SizeChanged(object sender, EventArgs e)
         {
@@ -139,20 +134,11 @@ namespace WindowsFormsApplication1
         {
             if (e.Node.Level == 1 && (e.Button == MouseButtons.Left))
             {
-                String picPath = e.Node.Tag.ToString();
-                picboxMain.Image = Image.FromFile(picPath);
+                ShowFile(e.Node.Tag.ToString(), picboxMain);
                 curNode = e.Node;
             }
         }
 
-        private void picboxMain_MouseClick(object sender, MouseEventArgs e)
-        {
-            /*System.Drawing.Point pInit = picboxMain.Location;
-            picboxMain.Size = new Size(picboxMain.Width + 50, picboxMain.Height + 50);
-            double len = 2.6 * (button1.Width);
-            picboxMain.Location = new Point((this.Width - picboxMain.Width + Convert.ToInt16(len)) / 2, (this.Height - picboxMain.Height) / 2);
-                */
-        }
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
@@ -182,17 +168,27 @@ namespace WindowsFormsApplication1
         {
             if (e.Node.Level == 1 && (e.Button == MouseButtons.Left))
             {
-                String picPath = e.Node.Tag.ToString();
-                picboxMain.Image = Image.FromFile(picPath);
+                ShowFile(e.Node.Tag.ToString(), picboxMain);
+                curNode = e.Node;
             }
         }
-
+        void ShowFile(String filePath,PictureBox pbox)
+        {
+            if (File.Exists(filePath))
+            {
+                pbox.Image = Image.FromFile(filePath);
+            }
+            else
+            {
+                MessageBox.Show("文件不存在！");
+            }
+        }
         private void trViewCollect_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             if (e.Node.Level == 1 && (e.Button == MouseButtons.Left))
             {
-                String picPath = e.Node.Tag.ToString();
-                picboxMain.Image = Image.FromFile(picPath);
+                ShowFile(e.Node.Tag.ToString(), picboxMain);
+                curNode = e.Node;
             }
         }
 
@@ -345,23 +341,9 @@ namespace WindowsFormsApplication1
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (curNode == null || curNode.NextNode == null)
-                return;
-            curNode = curNode.NextNode;
-            if (curNode != null)
-            {
-                String picPath = curNode.Tag.ToString();
-                picboxMain.Image = Image.FromFile(picPath);
-            }
-
+            NextPage();
         }
-
-        private void trviewGitar_AfterSelect(object sender, TreeViewEventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
+        void PrePage()
         {
             if (curNode == null || curNode.PrevNode == null)
                 return;
@@ -371,6 +353,21 @@ namespace WindowsFormsApplication1
                 String picPath = curNode.Tag.ToString();
                 picboxMain.Image = Image.FromFile(picPath);
             }
+        }
+        void NextPage()
+        {
+            if (curNode == null || curNode.NextNode == null)
+                return;
+            curNode = curNode.NextNode;
+            if (curNode != null)
+            {
+                String picPath = curNode.Tag.ToString();
+                picboxMain.Image = Image.FromFile(picPath);
+            }
+        }
+        private void button1_Click(object sender, EventArgs e)
+        {
+            PrePage();
         }
 
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
@@ -382,8 +379,32 @@ namespace WindowsFormsApplication1
 
         private void picBoxAuthor_MouseClick(object sender, MouseEventArgs e)
         {
+            
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+         
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
             frmIntro frm = new frmIntro();
             frm.Show();
         }
+
+        private void FormMain_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Down || e.KeyCode == Keys.Right)
+            {
+                NextPage();
+            }
+            else  if (e.KeyCode == Keys.Up || e.KeyCode == Keys.Left)
+            {
+                PrePage();
+            }
+        }
+
+     
     }
 }
