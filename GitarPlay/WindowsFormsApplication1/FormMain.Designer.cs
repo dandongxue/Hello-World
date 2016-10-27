@@ -48,6 +48,7 @@
             this.trViewCollect = new System.Windows.Forms.TreeView();
             this.lb2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.picboxMain)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -55,6 +56,7 @@
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // trviewGitar
@@ -83,13 +85,16 @@
             this.picboxMain.BackColor = System.Drawing.Color.Transparent;
             this.picboxMain.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.picboxMain.InitialImage = null;
-            this.picboxMain.Location = new System.Drawing.Point(292, 8);
+            this.picboxMain.Location = new System.Drawing.Point(10, 0);
             this.picboxMain.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.picboxMain.Name = "picboxMain";
-            this.picboxMain.Size = new System.Drawing.Size(457, 661);
+            this.picboxMain.Size = new System.Drawing.Size(457, 658);
             this.picboxMain.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picboxMain.TabIndex = 1;
             this.picboxMain.TabStop = false;
+            this.picboxMain.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picboxMain_MouseDown);
+            this.picboxMain.MouseMove += new System.Windows.Forms.MouseEventHandler(this.picboxMain_MouseMove);
+            this.picboxMain.MouseUp += new System.Windows.Forms.MouseEventHandler(this.picboxMain_MouseUp);
             // 
             // panel1
             // 
@@ -235,6 +240,7 @@
             this.trViewCollect.Size = new System.Drawing.Size(268, 519);
             this.trViewCollect.TabIndex = 0;
             this.trViewCollect.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.trViewCollect_NodeMouseClick);
+            this.trViewCollect.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.trViewCollect_NodeMouseDoubleClick);
             // 
             // lb2
             // 
@@ -262,14 +268,24 @@
             this.label1.Text = "软件说明";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.Transparent;
+            this.panel2.Controls.Add(this.picboxMain);
+            this.panel2.Location = new System.Drawing.Point(285, 8);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(478, 661);
+            this.panel2.TabIndex = 11;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.BackgroundImage = global::WindowsFormsApplication1.Properties.Resources._11;
+            this.BackgroundImage = global::WindowsFormsApplication1.Properties.Resources._112;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(864, 672);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.lb3);
@@ -278,7 +294,6 @@
             this.Controls.Add(this.lb2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.picboxMain);
             this.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
@@ -299,6 +314,7 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -324,6 +340,7 @@
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Panel panel2;
     }
 }
 

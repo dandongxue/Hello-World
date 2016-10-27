@@ -27,6 +27,8 @@ namespace WindowsFormsApplication1
         private TcpClient tcp;
         private bool RunningFlag = false;
         private TreeNode curNode=null;
+        private int xPos, yPos;
+        private bool mvFlag = false;
         public FormMain()
         {
             InitializeComponent();
@@ -83,6 +85,10 @@ namespace WindowsFormsApplication1
         }
         private void Form1_Load(object sender, EventArgs e)
         {
+            SetStyle(ControlStyles.UserPaint, true);
+            SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
+            SetStyle(ControlStyles.OptimizedDoubleBuffer, true); // 双缓冲
+            this.UpdateStyles();
             trviewGitar.Nodes.Clear();
             this.MouseWheel += Form1_MouseWheel;
             if (Directory.Exists(workDir+"\\Gitar") == false)//如果不存在就创建file文件夹     
@@ -109,15 +115,15 @@ namespace WindowsFormsApplication1
             System.Drawing.Point pInit = picboxMain.Location;
             if (e.Delta > 0) //放大图片
             {
-                picboxMain.Size = new Size(picboxMain.Width + 50, picboxMain.Height + 50);
+                picboxMain.Size = new Size(picboxMain.Width + 40, picboxMain.Height + 40);
             }
             else
             {  //缩小图片
-                picboxMain.Size = new Size(picboxMain.Width - 50, picboxMain.Height - 50);
+                picboxMain.Size = new Size(picboxMain.Width - 40, picboxMain.Height - 40);
             }
             //设置图片在窗体居中
             double len = 2.6 * (button1.Width);
-            picboxMain.Location = new Point((this.Width - picboxMain.Width + Convert.ToInt16(len)) / 2, (this.Height - picboxMain.Height) / 2);
+            //picboxMain.Location = new Point((this.Width - picboxMain.Width + Convert.ToInt16(len)) / 2, (this.Height - picboxMain.Height) / 2);
 
            /* System.Drawing.SolidBrush myBrush = new System.Drawing.SolidBrush(System.Drawing.Color.Red);//画刷
             System.Drawing.Graphics formGraphics = this.CreateGraphics();
@@ -404,6 +410,52 @@ namespace WindowsFormsApplication1
                 PrePage();
             }
         }
+
+        private void trViewCollect_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            if (e.Node.Level == 0 && (e.Button == MouseButtons.Left))
+            {
+                String songName = e.Node.Text;
+                XmlDocument doc = new XmlDocument();
+                string strFileName = workDir + "\\collect.xml";
+                doc.Load(strFileName);
+                XmlNodeList nodeList = doc.SelectSingleNode("collectstore").ChildNodes; //查找节点 
+                foreach (XmlNode xn in nodeList)
+                {
+                    XmlElement xe = (XmlElement)xn;
+                    if(xe.GetAttribute("Name") == songName)
+                    {
+                        xn.ParentNode.RemoveChild(xe);
+                        MessageBox.Show(songName + "  已删除！");
+                        break;
+                    }
+                }
+                doc.Save(strFileName);
+            }
+            InitCollectTree(trViewCollect, workDir + "\\collect.xml");
+        }
+
+        private void picboxMain_MouseDown(object sender, MouseEventArgs e)
+        {
+            mvFlag = true;
+            xPos = e.X;
+            yPos = e.Y;
+        }
+
+        private void picboxMain_MouseUp(object sender, MouseEventArgs e)
+        {
+            mvFlag = false;
+        }
+
+        private void picboxMain_MouseMove(object sender, MouseEventArgs e)
+        {
+            if(mvFlag)
+            {
+                picboxMain.Left += Convert.ToInt16(e.X - xPos);
+                picboxMain.Top += Convert.ToInt16(e.Y - yPos);
+            }
+        }
+
 
      
     }
