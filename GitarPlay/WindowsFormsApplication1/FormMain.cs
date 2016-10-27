@@ -456,6 +456,16 @@ namespace WindowsFormsApplication1
             }
         }
 
+        private void FormMain_Click(object sender, EventArgs e)
+        {
+            picboxMain.Focus();
+        }
+
+        private void picboxMain_Click(object sender, EventArgs e)
+        {
+            picboxMain.Focus();
+        }
+
 
      
     }

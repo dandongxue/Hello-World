@@ -83,7 +83,6 @@
             // picboxMain
             // 
             this.picboxMain.BackColor = System.Drawing.Color.Transparent;
-            this.picboxMain.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.picboxMain.InitialImage = null;
             this.picboxMain.Location = new System.Drawing.Point(10, 0);
             this.picboxMain.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -92,6 +91,7 @@
             this.picboxMain.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picboxMain.TabIndex = 1;
             this.picboxMain.TabStop = false;
+            this.picboxMain.Click += new System.EventHandler(this.picboxMain_Click);
             this.picboxMain.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picboxMain_MouseDown);
             this.picboxMain.MouseMove += new System.Windows.Forms.MouseEventHandler(this.picboxMain_MouseMove);
             this.picboxMain.MouseUp += new System.Windows.Forms.MouseEventHandler(this.picboxMain_MouseUp);
@@ -305,6 +305,7 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.SizeChanged += new System.EventHandler(this.Form1_SizeChanged);
+            this.Click += new System.EventHandler(this.FormMain_Click);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormMain_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.picboxMain)).EndInit();
             this.panel1.ResumeLayout(false);

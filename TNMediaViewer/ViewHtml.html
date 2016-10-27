@@ -1,0 +1,429 @@
+﻿
+
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head><title>
+	CodeProject: Article HTML. Free source code and programming help
+</title><link rel="stylesheet" type="text/css" href="/App_Themes/NetCommunity/CodeProject.css?dt=20090125" /></head>
+<base href="http://www.codeproject.com/KB/dotnet/" />
+<body>
+    <!--  HTML for article "Photo & Video Viewer with Encryption Capability" by tedqn\nURL: http://www.codeproject.com/KB/dotnet/PhotoAndVideoViewer.aspx
+Copyright 2009 by tedqn\nAll formatting, additions and  alterations Copyright © CodeProject, 1999-2009 -->
+	
+    <p><b>Please choose 'View Source' in your browser to view the HTML, or  
+File | Save to save this file to your hard drive for editing.</b></p>
+<hr class="Divider subdue" />
+    
+<div> <span id="ArticleContent"> 
+  <ul class="download">
+    <li><a href="PhotoAndVideoViewer/Article_src.zip">Download source - 430.11 
+      KB</a></li>
+  </ul>
+  <img height="458" src="PhotoAndVideoViewer/Article.gif" width="590" /> 
+  <h2>Introduction</h2>
+  <p>I've tried a few image viewer utilities out there but couldn't find one that 
+    really fits my preference, so I've decided to write up one for my own use. 
+    I've got all the functionality I need but would like to get input from experts 
+    out there on a few issues. </p>
+  <h2>The Problems with Common Image Utilities</h2>
+  <ul>
+    <li>Load photos as a thumbnail list with no option to switch to simple file 
+      name list. This would take forever when the folder contains several hundreds 
+      of photos. This is very common when unloading photos taken from a digital 
+      camera that has 1GB+ SD card.</li>
+    <li>The thumbnail list would reside in a wide view pane that takes up valuable 
+      view space for the main image plus the annoying double click to open a photo 
+      in the main view, then close and double click on another.</li>
+  </ul>
+  <h2>The Utility Features</h2>
+  <ul>
+    <li>There are too many features to list but the general idea is to make the 
+      photo list as narrow as possible and the main view as large as possible. 
+      Selecting a photo would display it in the main view using the default &quot;Fit 
+      to screen&quot; so user can see the whole picture without having to scroll 
+      right/down. A photo taken from a 6 mega pixels digital camera is typically 
+      2576 x 1932 resolution. Once a photo is selected, the listview has focus 
+      and subsequent photo can be viewed by simply pressing the up/down key to 
+      select next/previous file. </li>
+  </ul>
+  <h2>Useful Imaging Code</h2>
+  <pre lang="cs">//
+       static Image ScaleByPercent(Image imgPhoto, int Percent)
+        {
+            float nPercent = ((float)Percent / 100);
+
+            int sourceWidth = imgPhoto.Width;
+            int sourceHeight = imgPhoto.Height;
+            int destWidth = (int)(sourceWidth * nPercent);
+            int destHeight = (int)(sourceHeight * nPercent);
+
+            Bitmap bmPhoto = new Bitmap(destWidth, destHeight, 
+					PixelFormat.Format24bppRgb);
+            bmPhoto.SetResolution(imgPhoto.HorizontalResolution, 
+					imgPhoto.VerticalResolution);
+
+            Graphics grPhoto = Graphics.FromImage(bmPhoto);
+            grPhoto.InterpolationMode = InterpolationMode.HighQualityBicubic;
+
+            grPhoto.DrawImage(imgPhoto,
+                new Rectangle(0, 0, destWidth, destHeight),
+                new Rectangle(0, 0, sourceWidth, sourceHeight),
+                GraphicsUnit.Pixel);
+
+            grPhoto.Dispose();
+            return bmPhoto;
+        }
+
+        static Image CreateThumbnail(Image imgPhoto)
+        {
+            Bitmap thumbBmp = new Bitmap(100, 100);
+            Graphics g = Graphics.FromImage(thumbBmp);
+            g.FillRectangle(Brushes.White, 0, 0, 100, 100);
+
+            //Adjust settings to make this as high-quality as possible
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+            g.InterpolationMode = 
+		System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+            g.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
+
+            int thumbWidth, thumbHeight;
+            if (imgPhoto.Width &gt;= imgPhoto.Height) 	// reduce width to 100 
+						// then height proportionally
+            {
+                thumbWidth = 100;
+                thumbHeight = (int)((double)imgPhoto.Height * 
+					(100 / (double)imgPhoto.Width));
+            }
+            else // reduce height to 100 then height proportionally
+            {
+                thumbHeight = 100;
+                thumbWidth = (int)((double)imgPhoto.Width * 
+				(100 / (double)imgPhoto.Height));
+            }
+
+            // draw the original Image onto the empty Bitmap, 
+	   // don't use GetThumbnailImage() from original
+            // because it returns poor quality thumb
+            int top = (100 - thumbHeight) / 2;
+            int left = (100 - thumbWidth) / 2;
+
+            g.DrawImage(imgPhoto, new Rectangle(left, top, thumbWidth, thumbHeight),
+                new Rectangle(0, 0, imgPhoto.Width, imgPhoto.Height),
+                GraphicsUnit.Pixel);
+
+            g.Dispose();
+
+            return thumbBmp;
+        }
+
+		  private static Image AlterBrightness(Image bmp, int level)
+        {
+            if (level == 50)
+            {
+                // do nothing
+                return bmp;
+            }
+
+            Graphics graphics = Graphics.FromImage(bmp);
+            if (level &lt; 50)
+            {
+                // make it darker
+                // Work out how much darker
+                int conversion = 250 - (5 * level);
+                Pen pDark = new Pen(Color.FromArgb(conversion, 0, 0, 0), bmp.Width * 2);
+                graphics.DrawLine(pDark, 0, 0, bmp.Width, bmp.Height);
+            }
+            else if (level &gt; 50)
+            {
+                // make it lighter
+                // Work out how much lighter.
+                int conversion = (5 * (level - 50));
+                Pen pLight = new Pen(Color.FromArgb(conversion, 255, 255, 255), 
+								bmp.Width * 2);
+                graphics.DrawLine(pLight, 0, 0, bmp.Width, bmp.Height);
+            }
+            graphics.Save();
+            graphics.Dispose();
+            return bmp;
+        }
+//
+
+
+</pre>
+  </span>
+  <h2><span id="ArticleContent">Encryption/Decryption Code</span></h2>
+  <pre lang="cs"><span id="ArticleContent">//
+
+		// encryption key (stored in global variable _CurrentPassword) must be an 8 character string and is case sensitive, ex: myKey123
+
+         private bool EncryptFile(string inputFile, string outputFile)
+        {
+            bool bSuccess = false;
+
+            if (_CurrentPassword == "") return bSuccess;
+
+            try
+            {
+                UnicodeEncoding UE = new UnicodeEncoding();
+                byte[] key = UE.GetBytes(@_CurrentPassword);
+
+                string cryptFile = outputFile;
+                FileStream fsCrypt = new FileStream(cryptFile, FileMode.Create);
+
+                RijndaelManaged RMCrypto = new RijndaelManaged();
+
+                CryptoStream cs = new CryptoStream(fsCrypt,
+                    RMCrypto.CreateEncryptor(key, key),
+                    CryptoStreamMode.Write);
+
+                FileStream fsIn = new FileStream(inputFile, FileMode.Open);
+
+                int data;
+                while ((data = fsIn.ReadByte()) != -1)
+                    cs.WriteByte((byte)data);
+
+
+                fsIn.Close();
+                cs.Close();
+                fsCrypt.Close();
+
+                bSuccess = true;
+            }
+            catch(Exception)
+            {
+                // nothing    
+            }
+            
+            return bSuccess;
+        }
+
+		// decrypt file on the fly into MemoryStream without creating a physical file
+		// useful for viewing an encrypted photo file directly 
+		// ex: Bitmap orgImage = (Bitmap)Bitmap.FromStream(DecryptFile(SomeFileName));
+        private MemoryStream DecryptFile(string inputFile)
+        {
+            if (_CurrentPassword == "") return _MSErrorImage;
+
+            FileStream fsCrypt = new FileStream(inputFile, FileMode.Open);
+            try
+            {
+                MemoryStream msOut = new MemoryStream();
+                UnicodeEncoding UE = new UnicodeEncoding();
+                byte[] key = UE.GetBytes(@_CurrentPassword);
+
+                RijndaelManaged RMCrypto = new RijndaelManaged();
+
+                CryptoStream cs = new CryptoStream(fsCrypt, RMCrypto.CreateDecryptor(key, key), CryptoStreamMode.Read);
+
+                int data;
+                while ((data = cs.ReadByte()) != -1)
+                {
+                    msOut.WriteByte((byte)data);
+                }
+                cs.Close();
+                fsCrypt.Close();
+
+                return msOut;
+            }
+            catch 
+            {
+                fsCrypt.Close(); // release file lock
+                return _MSErrorImage;
+            }
+        }
+
+		// decrypt into another physical file
+        private bool DecryptFile(string inputFile, string outputFile)
+        {
+            bool bSuccess = false;
+            if (_CurrentPassword == "") return bSuccess;
+
+            FileStream fsCrypt = new FileStream(inputFile, FileMode.Open);
+            try
+            {
+                FileStream fsOut = new FileStream(outputFile, FileMode.Create);
+                UnicodeEncoding UE = new UnicodeEncoding();
+                byte[] key = UE.GetBytes(@_CurrentPassword);
+
+                RijndaelManaged RMCrypto = new RijndaelManaged();
+
+                CryptoStream cs = new CryptoStream(fsCrypt, RMCrypto.CreateDecryptor(key, key), CryptoStreamMode.Read);
+
+                int data;
+                while ((data = cs.ReadByte()) != -1)
+                {
+                    fsOut.WriteByte((byte)data);
+                }
+                cs.Close();
+                fsCrypt.Close();
+                fsOut.Close();
+                bSuccess = true;
+            }
+            catch
+            {
+                fsCrypt.Close(); // release file lock
+            }
+            
+            return bSuccess;
+        }
+
+//
+
+</span></pre>
+  <h2>Partial Thumbnails Creation</h2>
+  
+  For thumbnail rendering, I use an approach similar to Stack's Pop. 
+  <ul>
+    <li>The Listview is mapped to an ImageList in design view.</li>
+    <li>For thumbnail display mode, set all images in the ImageList to a default "Processing" image and store the list of pending (to be created) thumbnails in a custom object list.</li>
+    <li>The thumbnails creation process is run in a separate Thread. It loops through the list of pending thumbnails and process 10 at a time (or less if less than 10 remaining), then exits and calls a function that executes in the parent Thread to update the ImageList with the 
+	newly created thumbnails and refresh the ListView. The parent Thread function then pops (remove) the first 10 items from the list, checks if there're still pending items and calls the thumbnails creation thread again until there're no more in the Pending list.</li>	
+  </ul>
+    
+  <pre lang="cs"><span id="ArticleContent">//
+        Thread _CreateThumbListThread = null;<br>        List&lt;ThumbnailItem&gt; _ThumbList = new List&lt;ThumbnailItem&gt;();<br>        int _MaxThumbPerThreadRun = 10;
+
+        private void RunThumbGeneratorThread()
+        {
+            if (_ThumbList.Count > 0)
+            {
+                _CreateThumbListThread = new Thread(new ThreadStart(CreateThumbList));
+                _CreateThumbListThread.Start();
+            }
+        }
+        
+        private void CreateThumbList()
+        {
+            
+            int NumItemsToProcess = (_MaxThumbPerThreadRun < _ThumbList.Count ? _MaxThumbPerThreadRun : _ThumbList.Count);
+            for (int i = 0; i < NumItemsToProcess; i++)
+            {
+                if (IsPhoto(_ThumbList[i].FileExtension)) 
+                {
+                    Bitmap orgImage;
+
+                    if (_ThumbList[i].FileFullName.IndexOf("_Enc@@") != -1) // encrypted file -> decrypt first
+                    {
+                        GetCurrentConfigEncryptionKey(false);
+                        orgImage = (Bitmap)Bitmap.FromStream(DecryptFile(_ThumbList[i].FileFullName));
+                    }
+                    else
+                    {
+                        orgImage = (Bitmap)Bitmap.FromFile(_ThumbList[i].FileFullName);
+                        
+                    }
+                    _ThumbList[i].ThumbnailImage = CreateThumbnail(orgImage);
+                }
+            }
+
+            UpdateLargeIcons(NumItemsToProcess);
+        }
+
+        private delegate void UpdateLargeIconsDelegate(int ItemsProcessed);
+
+        private void UpdateLargeIcons(int ItemsProcessed)
+        {
+            if (listView1.InvokeRequired)
+            {
+                UpdateLargeIconsDelegate d = new UpdateLargeIconsDelegate(UpdateLargeIcons);
+                listView1.BeginInvoke(d, new object[] { ItemsProcessed });
+            }
+            else
+            {
+                for (int i = 0; i < ItemsProcessed; i++)
+                {
+                    thumbImageList.Images[_ThumbList[i].ThumbListIndex] = _ThumbList[i].ThumbnailImage;
+                }
+                
+                listView1.Refresh();
+                
+                // remove processed thumbs
+                for (int j = 0; j < ItemsProcessed; j++)
+                {
+                    _ThumbList.RemoveAt(0);
+                }
+
+                // still has unprocessed thumbs => run generator again
+                if (_ThumbList.Count > 0)
+                {
+                    RunThumbGeneratorThread();
+                }
+            }
+        }
+
+    public class ThumbnailItem
+    {
+        Image _ThumbImage = null;
+
+        public ThumbnailItem(int ThumbListIndex, string FileFullName, string FileExtension)
+        {
+            this.ThumbListIndex = ThumbListIndex;
+            this.FileFullName = FileFullName;
+            this.FileExtension = FileExtension;
+        }
+        public int ThumbListIndex
+        {
+            get;
+            set;
+        }
+        public string FileFullName
+        {
+            get;
+            set;
+        }
+        public string FileExtension
+        {
+            get;
+            set;
+        }
+        public Image ThumbnailImage
+        {
+            get { return _ThumbImage; }
+            set { _ThumbImage = value;  }
+        }
+
+//
+</span></pre>
+  <span> 
+  <h2>Framework Components Used</h2>
+  <ul>
+    <li><code>TreeView</code>, <code>ListView</code>, <code>PictureBox</code>, 
+      <code>TabControl</code>, etc.</li>
+  </ul>
+  <h2>Compiler Requirements/Usage Notes</h2>
+  <ul>
+    <li>This program uses Windows Media Player to play most videos. Follow Microsoft 
+      guideline <a href="http://msdn.microsoft.com/en-us/library/bb249583(VS.85).aspx">Using 
+      the Windows Media Player Control with Microsoft Visual Studio</a> to make 
+      it reference-able by the project.</li>
+    <li>Encryption/Decryption: I'm not an expert in this field and the code is 
+      a modified copy from another programmer. Use it at your own risk.</li>
+  </ul>
+  <h2>Improvement Desires</h2>
+  <ul>
+    <li>When viewing photos as thumbnail list, the <code>ListView </code>is initially 
+      loaded with just the file names. A separate thread is called to generate 
+      all the thumbnails, and once complete, invoke another function running in 
+      the parent thread to update the <code>listview</code>'s <code>LargeIconList 
+      </code>with the generated thumbnails. This prevents the <code>listview </code>from 
+      freezing up while hundreds of thumbnails are being created in the background 
+      and allows photo selection to load in main view. I'm looking for a way to 
+      generate, say, 10 or 20 thumbnails at a time and make them show in the <code>Listview 
+      </code>and repeat the same process until all are shown. I've tried a few 
+      approaches such as thread callback but the display is just too screwy.
+	  <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&raquo; 2/18/2009 - Successfully modified to load 10 thumbnails at a time.
+	  </li>
+    <li>The thumbnail creation uses the best setting provided by the .NET library 
+      but some photos just won't display as good as the built-in explorer's thumbnail 
+      view.</li>
+    <li>Efficiency - prevent memory leak, better way to dispose objects/initializing 
+      components, etc.</li>
+  </ul>
+  <h2>History</h2>
+  <ul>
+    <li>12<sup>th</sup> February, 2009: Initial version</li>
+    <li>18<sup>th</sup> February, 2009: Modified version</li>	
+  </ul>
+  </span> </div>
+ 
+</body>
+</html>

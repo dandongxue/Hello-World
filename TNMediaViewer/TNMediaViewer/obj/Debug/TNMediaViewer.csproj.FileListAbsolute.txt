@@ -1,0 +1,14 @@
+C:\Users\gensound\Desktop\TNMediaViewer\TNMediaViewer\obj\Debug\Interop.WMPLib.dll
+C:\Users\gensound\Desktop\TNMediaViewer\TNMediaViewer\obj\Debug\AxInterop.WMPLib.dll
+C:\Users\gensound\Desktop\TNMediaViewer\TNMediaViewer\obj\Debug\TNMediaViewer.csproj.ResolveComReference.cache
+C:\Users\gensound\Desktop\TNMediaViewer\TNMediaViewer\bin\Debug\TNMediaViewer.exe
+C:\Users\gensound\Desktop\TNMediaViewer\TNMediaViewer\bin\Debug\TNMediaViewer.pdb
+C:\Users\gensound\Desktop\TNMediaViewer\TNMediaViewer\bin\Debug\Interop.WMPLib.dll
+C:\Users\gensound\Desktop\TNMediaViewer\TNMediaViewer\bin\Debug\AxInterop.WMPLib.dll
+C:\Users\gensound\Desktop\TNMediaViewer\TNMediaViewer\obj\Debug\TNMediaViewer.csprojResolveAssemblyReference.cache
+C:\Users\gensound\Desktop\TNMediaViewer\TNMediaViewer\obj\Debug\TNMediaViewer.Form1.resources
+C:\Users\gensound\Desktop\TNMediaViewer\TNMediaViewer\obj\Debug\TNMediaViewer.Splash.resources
+C:\Users\gensound\Desktop\TNMediaViewer\TNMediaViewer\obj\Debug\TNMediaViewer.Properties.Resources.resources
+C:\Users\gensound\Desktop\TNMediaViewer\TNMediaViewer\obj\Debug\TNMediaViewer.csproj.GenerateResource.Cache
+C:\Users\gensound\Desktop\TNMediaViewer\TNMediaViewer\obj\Debug\TNMediaViewer.exe
+C:\Users\gensound\Desktop\TNMediaViewer\TNMediaViewer\obj\Debug\TNMediaViewer.pdb
