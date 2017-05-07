@@ -34,16 +34,19 @@ class spider:
         if not ie:
             os.makedirs(homeDir)
         else:
-            print " Already Exits"
+            #print " Already Exits"
             return
     except Exception,e:
-        print 'MakeDir Failed:'
+        print 'MakeDir Failed:[info={0}]'.format(str(e))
+
     try:
         req=urllib2.Request(songUrl)
         html=urllib2.urlopen(req).read().decode('gbk')
         pattern=re.compile(r'<img src="(.*?)" alt=".*? /> ',re.I)
         items=pattern.findall(html)
         tag = 1
+        if len(items) == 0 :
+            print "Its error"
         for ite in items:
             imgurl=r"http://www.ccguitar.cn/"+ite
             #if tag == 1:print homeDir.decode('gbk')
@@ -60,7 +63,7 @@ class spider:
          f.close()
 craw=spider()
 
-for i in range(152,153):
+for i in range(10,20):
     print "page: " + str(i)
     craw.getlist(r"http://www.ccguitar.cn/pu_list_0_"+str(i)+"_0_5_8.htm");
 for i in range(len(craw.use)):

@@ -17,3 +17,13 @@ F:\Repository\Gitar-Play\GitarPlay\WindowsFormsApplication1\obj\Debug\WindowsFor
 F:\Repository\Gitar-Play\GitarPlay\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
 F:\Repository\Gitar-Play\GitarPlay\WindowsFormsApplication1\obj\Debug\GitarPlay.csproj.GenerateResource.Cache
 F:\Repository\Gitar-Play\GitarPlay\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.frmIntro.resources
+F:\Gitrepo\Gitar-Play\GitarPlay\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe.config
+F:\Gitrepo\Gitar-Play\GitarPlay\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.exe
+F:\Gitrepo\Gitar-Play\GitarPlay\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.pdb
+F:\Gitrepo\Gitar-Play\GitarPlay\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe
+F:\Gitrepo\Gitar-Play\GitarPlay\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.pdb
+F:\Gitrepo\Gitar-Play\GitarPlay\WindowsFormsApplication1\obj\Debug\GitarPlay.csprojResolveAssemblyReference.cache
+F:\Gitrepo\Gitar-Play\GitarPlay\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.FormMain.resources
+F:\Gitrepo\Gitar-Play\GitarPlay\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.frmIntro.resources
+F:\Gitrepo\Gitar-Play\GitarPlay\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
+F:\Gitrepo\Gitar-Play\GitarPlay\WindowsFormsApplication1\obj\Debug\GitarPlay.csproj.GenerateResource.Cache
