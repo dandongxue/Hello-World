@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Linq;
+using System.Collections;
 
 namespace WindowsFormsApplication1
 {
@@ -83,6 +84,7 @@ namespace WindowsFormsApplication1
             ShowInfoByElements(elements);
 
         }
+        private ArrayList arrTnode = new ArrayList();
         private void Form1_Load(object sender, EventArgs e)
         {
             SetStyle(ControlStyles.UserPaint, true);
@@ -105,9 +107,13 @@ namespace WindowsFormsApplication1
             ipLocalPoint = new IPEndPoint(lip, localPort);*/
             IPAddress.TryParse("120.210.207.197", out remoteIp);//"120.210.207.197"
             /*remoteIpend = new IPEndPoint(remoteIp, 28585);
-            
             mySocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
             mySocket.Bind(ipLocalPoint);*/
+
+            foreach (TreeNode tnode in trviewGitar.Nodes)
+            {
+                arrTnode.Add(tnode);
+            }
             
         }
         void Form1_MouseWheel(object sender, MouseEventArgs e)
@@ -309,8 +315,10 @@ namespace WindowsFormsApplication1
             String ans = tboxSearch.Text.Trim();
             if (ans.Trim() == "")
                 return;
-            foreach (TreeNode tnode in trviewGitar.Nodes)
+
+            for (int a = 0; a < arrTnode.Count; a++)
             {
+                TreeNode tnode = arrTnode[a] as TreeNode;
                 if (tnode.Text.Contains(ans))
                 {
                     DirectoryInfo info = new DirectoryInfo(tnode.Tag.ToString());
@@ -324,25 +332,7 @@ namespace WindowsFormsApplication1
                         subNode.Nodes.Add(nodePic);
                     }
                 }
-            }
-            tcp=new TcpClient();
-            try
-            {
-                tcp.Connect(remoteIp, 28585);
-                if (tcp.Connected)
-                {
-                    byte[] data = Encoding.Default.GetBytes(ans);
-                    NetworkStream streamToServer = tcp.GetStream();
-                    streamToServer.Write(data, 0, data.Length);
-                    streamToServer.Flush();
-                    //int sendNum = mySocket.SendTo(data, data.Length, SocketFlags.None, remoteIpend);
-                }
-                tcp.Close();
-            }
-            catch (Exception ee)
-            {
-                //MessageBox.Show(ee.Message);
-            }
+            }    
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -464,6 +454,11 @@ namespace WindowsFormsApplication1
         private void picboxMain_Click(object sender, EventArgs e)
         {
             picboxMain.Focus();
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            tboxSearch_TextChanged(sender, e);
         }
 
 

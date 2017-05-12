@@ -1,31 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <collectstore>
-  <Guitar Name="《平凡之路》G调高清简单吉他谱-朴树" ISBN="7-111-19149-2" PicNum="3">
-    <path1>E:\Bayes\GitResp\Gitar-Play\GitarPlay\Gitar\《平凡之路》G调高清简单吉他谱-朴树\1.gif</path1>
-    <path2>E:\Bayes\GitResp\Gitar-Play\GitarPlay\Gitar\《平凡之路》G调高清简单吉他谱-朴树\2.gif</path2>
-    <path3>E:\Bayes\GitResp\Gitar-Play\GitarPlay\Gitar\《平凡之路》G调高清简单吉他谱-朴树\3.gif</path3>
-  </Guitar>
-  <Guitar Name="《勿忘心安》by午夜编配-张杰" ISBN="7-111-19149-2" PicNum="3">
-    <path1>E:\Bayes\GitResp\Gitar-Play\GitarPlay\Gitar\《勿忘心安》by午夜编配-张杰\1.gif</path1>
-    <path2>E:\Bayes\GitResp\Gitar-Play\GitarPlay\Gitar\《勿忘心安》by午夜编配-张杰\2.gif</path2>
-    <path3>E:\Bayes\GitResp\Gitar-Play\GitarPlay\Gitar\《勿忘心安》by午夜编配-张杰\3.gif</path3>
-  </Guitar>
-  <Guitar Name="《斑马斑马》女生版本-宋冬野" ISBN="7-111-19149-2" PicNum="3">
-    <path1>F:\Repository\Gitar-Play\GitarPlay\Gitar\《斑马斑马》女生版本-宋冬野\1.gif</path1>
-    <path2>F:\Repository\Gitar-Play\GitarPlay\Gitar\《斑马斑马》女生版本-宋冬野\2.gif</path2>
-    <path3>F:\Repository\Gitar-Play\GitarPlay\Gitar\《斑马斑马》女生版本-宋冬野\3.gif</path3>
-  </Guitar>
   <Guitar Name="《斑马斑马》by午夜编配-宋冬野" ISBN="7-111-19149-2" PicNum="2">
-    <path1>F:\Repository\Gitar-Play\GitarPlay\Gitar\《斑马斑马》by午夜编配-宋冬野\1.gif</path1>
-    <path2>F:\Repository\Gitar-Play\GitarPlay\Gitar\《斑马斑马》by午夜编配-宋冬野\2.gif</path2>
+    <path1>E:\GitarPlay\Gitar\《斑马斑马》by午夜编配-宋冬野\1.gif</path1>
+    <path2>E:\GitarPlay\Gitar\《斑马斑马》by午夜编配-宋冬野\2.gif</path2>
   </Guitar>
-  <Guitar Name="《斑马斑马》宋冬野前奏（纵玩版）-宋冬野" ISBN="7-111-19149-2" PicNum="2">
-    <path1>F:\Repository\Gitar-Play\GitarPlay\Gitar\《斑马斑马》宋冬野前奏（纵玩版）-宋冬野\1.gif</path1>
-    <path2>F:\Repository\Gitar-Play\GitarPlay\Gitar\《斑马斑马》宋冬野前奏（纵玩版）-宋冬野\2.gif</path2>
-  </Guitar>
-  <Guitar Name="《斑马，斑马》C调带前奏间奏尾奏[超好听&amp;amp;简单弹]酷音小伟编谱-宋冬野" ISBN="7-111-19149-2" PicNum="3">
-    <path1>F:\Repository\Gitar-Play\GitarPlay\Gitar\《斑马，斑马》C调带前奏间奏尾奏[超好听&amp;amp;简单弹]酷音小伟编谱-宋冬野\1.gif</path1>
-    <path2>F:\Repository\Gitar-Play\GitarPlay\Gitar\《斑马，斑马》C调带前奏间奏尾奏[超好听&amp;amp;简单弹]酷音小伟编谱-宋冬野\2.gif</path2>
-    <path3>F:\Repository\Gitar-Play\GitarPlay\Gitar\《斑马，斑马》C调带前奏间奏尾奏[超好听&amp;amp;简单弹]酷音小伟编谱-宋冬野\3.gif</path3>
+  <Guitar Name="天天想你-张雨生" ISBN="7-111-19149-2" PicNum="3">
+    <path1>E:\GitarPlay\Gitar\天天想你-张雨生\1.gif</path1>
+    <path2>E:\GitarPlay\Gitar\天天想你-张雨生\2.gif</path2>
+    <path3>E:\GitarPlay\Gitar\天天想你-张雨生\3.gif</path3>
   </Guitar>
 </collectstore>
