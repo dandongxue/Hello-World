@@ -9,4 +9,15 @@
     <path2>E:\GitarPlay\Gitar\天天想你-张雨生\2.gif</path2>
     <path3>E:\GitarPlay\Gitar\天天想你-张雨生\3.gif</path3>
   </Guitar>
+  <Guitar Name="那女孩对我说-（完美版）-黄义达" ISBN="7-111-19149-2" PicNum="3">
+    <path1>E:\GitarPlay\Gitar\那女孩对我说-（完美版）-黄义达\1.gif</path1>
+    <path2>E:\GitarPlay\Gitar\那女孩对我说-（完美版）-黄义达\2.gif</path2>
+    <path3>E:\GitarPlay\Gitar\那女孩对我说-（完美版）-黄义达\3.gif</path3>
+  </Guitar>
+  <Guitar Name="I'myoursJasonMraz指间吉他高清-Jason Mraz" ISBN="7-111-19149-2" PicNum="4">
+    <path1>E:\GitarPlay\Gitar\I'myoursJasonMraz指间吉他高清-Jason Mraz\1.gif</path1>
+    <path2>E:\GitarPlay\Gitar\I'myoursJasonMraz指间吉他高清-Jason Mraz\2.gif</path2>
+    <path3>E:\GitarPlay\Gitar\I'myoursJasonMraz指间吉他高清-Jason Mraz\3.gif</path3>
+    <path4>E:\GitarPlay\Gitar\I'myoursJasonMraz指间吉他高清-Jason Mraz\4.gif</path4>
+  </Guitar>
 </collectstore>

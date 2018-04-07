@@ -52,7 +52,7 @@
             this.richTextBox1.ReadOnly = true;
             this.richTextBox1.Size = new System.Drawing.Size(368, 211);
             this.richTextBox1.TabIndex = 1;
-            this.richTextBox1.Text = "    实现了简单的本地吉他谱管理，可以自由添加本地吉他谱到Guitart目录作为扩展，实现的功能较为简单，使用问题请联系作者：240861544@qq.com";
+            this.richTextBox1.Text = "    实现了简单的本地吉他谱管理，可以自由添加本地吉他谱到Gitart目录作为扩展，实现的功能较为简单，使用问题请联系作者：240861544@qq.com";
             // 
             // frmIntro
             // 

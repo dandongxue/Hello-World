@@ -15,12 +15,14 @@ using System.Xml;
 using System.Xml.Linq;
 using System.Collections;
 
+
 namespace WindowsFormsApplication1
 {
     public partial class FormMain : Form
     {
         private PublicClass.AutoSizeForm autoform = new PublicClass.AutoSizeForm();
-        private String workDir = new DirectoryInfo(Application.StartupPath).Parent.Parent.Parent.FullName;
+        private String workDir = new DirectoryInfo(Application.StartupPath).FullName;
+        //private String workDir = new DirectoryInfo(Application.StartupPath).Parent.Parent.Parent.FullName;
         private IPEndPoint ipLocalPoint,remoteIpend;
         private IPAddress lip, remoteIp;
         private int localPort = 5526;
@@ -30,6 +32,7 @@ namespace WindowsFormsApplication1
         private TreeNode curNode=null;
         private int xPos, yPos;
         private bool mvFlag = false;
+        private Secret secret = new Secret();
         public FormMain()
         {
             InitializeComponent();
@@ -87,6 +90,14 @@ namespace WindowsFormsApplication1
         private ArrayList arrTnode = new ArrayList();
         private void Form1_Load(object sender, EventArgs e)
         {
+            String cpuId = secret.GetCpuID();
+            if (secret.CheckCpuIdentit(cpuId) == false)
+            {
+                MessageBox.Show("认证失败！");
+                this.Close();
+                return;
+            }
+            //MessageBox.Show(cpuId.ToString());
             SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true); // 双缓冲
@@ -104,7 +115,7 @@ namespace WindowsFormsApplication1
 
             //MessageBox.Show(getIPAddress());
             /*IPAddress.TryParse(getIPAddress(), out lip);
-            ipLocalPoint = new IPEndPoint(lip, localPort);*/
+            ipLocalPoint = new IPEndPoint(lip, localPort);
             IPAddress.TryParse("120.210.207.197", out remoteIp);//"120.210.207.197"
             /*remoteIpend = new IPEndPoint(remoteIp, 28585);
             mySocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
