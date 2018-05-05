@@ -62,7 +62,7 @@ class Spider:
         f.close()
 
 if __name__ == "__main__":
-    print "ok stat craw pictures!"
+    print "ok stat craw pictures!!!"
 
     craw = Spider()
     for i in range(10, 12):
