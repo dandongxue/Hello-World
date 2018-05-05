@@ -22,7 +22,7 @@ class Spider:
                 self.target.append(son_list)
 
         except Exception, e:
-            print 'ERROR,getList faile.[info={0}]'.format(str(e))
+            print 'ERROR,getList faild.[info={0}]'.format(str(e))
 
     def craw_song_img(self, author, songUrl, fileName):
         fileName = str(fileName).replace(" ", "").replace(':', '')
